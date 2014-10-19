@@ -26,6 +26,8 @@ var ReactClickDragMixin = {
         // only left mouse button
         if (e.button !== 0) return
 
+        e.preventDefault();
+
         this.__isMouseDown = true;
         this.__startPosition = {
             x: e.clientX,
@@ -37,14 +39,17 @@ var ReactClickDragMixin = {
 
     __onMouseUp: function(e) {
         if(this.__isMouseDown) {
-            this.__isMouseDown = false;
+            e.preventDefault();
 
+            this.__isMouseDown = false;
             this._onDragStop && this._onDragStop();
         }
     },
 
     __onMouseMove: function(e) {
         if(this.__isMouseDown) {
+            e.preventDefault();
+
             var deltaPos = {
                 x: e.clientX - this.__startPosition.x,
                 y: e.clientY - this.__startPosition.y
