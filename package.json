@@ -1,0 +1,25 @@
+{
+  "name": "react-clickdrag-mixin",
+  "version": "1.0.0",
+  "description": "number-editor component for react",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tleunen/react-clickdrag-mixin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tleunen/react-clickdrag-mixin/issues"
+  },
+  "homepage": "https://github.com/tleunen/react-clickdrag-mixin",
+  "keywords": [
+    "react",
+    "mixin",
+    "react-mixin"
+    "drag",
+    "clickdrag",
+    "dom",
+    "element"
+  ],
+  "author": "Tommy Leunen <tommy.leunen@gmail.com> (http://tommyleunen.com/)",
+  "license": "MIT"
+}
