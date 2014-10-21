@@ -1,5 +1,7 @@
 # react-clickdrag-mixin
 
+[![NPM](https://nodei.co/npm/react-clickdrag-mixin.png)](https://nodei.co/npm/react-clickdrag-mixin/)
+
 Click and drag mixin for React Component.
 
 To make it work, your component have to implement these functions:
