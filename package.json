@@ -1,7 +1,7 @@
 {
   "name": "react-clickdrag-mixin",
   "version": "1.0.2",
-  "description": "number-editor component for react",
+  "description": "Easily click and drag a react component",
   "main": "index.js",
   "repository": {
     "type": "git",
