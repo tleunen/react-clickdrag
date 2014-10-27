@@ -9,6 +9,9 @@ To make it work, your component have to implement these functions:
 - _onDragStop(event)
 - _onDragMove(event, deltaPosition)
 
+The mixin also offers this method to change the saved position of the nouse at the mouse down event, used to calculate the deltaPosition in _onDragMove
+- setMousePosition(x, y)
+
 ### Example
 
 ```js
