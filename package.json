@@ -1,6 +1,6 @@
 {
   "name": "react-clickdrag-mixin",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Easily click and drag a react component",
   "main": "index.js",
   "repository": {
