@@ -3,7 +3,10 @@
 var ReactClickDragMixin = {
     componentWillMount: function() {
         this.__isMouseDown = false;
-        this.__startPosition = null;
+        this.__mouseDownPosition = {
+            x: 0,
+            y: 0
+        };
     },
 
     componentDidMount: function() {
@@ -22,17 +25,19 @@ var ReactClickDragMixin = {
         document.removeEventListener('mouseup', this.__onMouseUp);
     },
 
+    setMousePosition: function(x, y) {
+        this.__mouseDownPosition.x = x;
+        this.__mouseDownPosition.y = y;
+    },
+
     __onMouseDown: function(e) {
         // only left mouse button
         if (e.button !== 0) return
 
         this.__isMouseDown = true;
-        this.__startPosition = {
-            x: e.clientX,
-            y: e.clientY
-        };
+        this.setMousePosition(e.clientX, e.clientY);
 
-        this._onDragStart && this._onDragStart(e, this.__startPosition);
+        this._onDragStart && this._onDragStart(e, this.__mouseDownPosition);
     },
 
     __onMouseUp: function(e) {
@@ -47,8 +52,8 @@ var ReactClickDragMixin = {
         if(this.__isMouseDown) {
 
             var deltaPos = {
-                x: e.clientX - this.__startPosition.x,
-                y: e.clientY - this.__startPosition.y
+                x: e.clientX - this.__mouseDownPosition.x,
+                y: e.clientY - this.__mouseDownPosition.y
             };
 
             this._onDragMove && this._onDragMove(e, deltaPos);
