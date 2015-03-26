@@ -21,5 +21,12 @@
     "element"
   ],
   "author": "Tommy Leunen <tommy.leunen@gmail.com> (http://tommyleunen.com/)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.13.1"
+  },
+  "scripts": {
+    "build": "babel src/clickdrag.js -o dist/clickdrag.js",
+    "dev": "babel src/clickdrag.js -w -o dist/clickdrag.js"
+  }
 }
