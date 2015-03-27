@@ -1,10 +1,19 @@
 'use strict';
 
 var React = require('react');
+var objectAssign = require('react/lib/Object.assign');
+
+var noop = function() {};
 
 function clickDrag(Component, opts = {}) {
 
     var touch = opts.touch || false;
+    var resetOnSpecialKeys = opts.resetOnSpecialKeys || false;
+    var getSpecificEventData = opts.getSpecificEventData || function() { return {}; };
+
+    var onDragStart = opts.onDragStart || noop;
+    var onDragStop = opts.onDragStop || noop;
+    var onDragMove = opts.onDragMove || noop;
 
     return class extends React.Component {
         constructor() {
@@ -20,6 +29,8 @@ function clickDrag(Component, opts = {}) {
                 moveDeltaX: 0,
                 moveDeltaY: 0
             };
+
+            this._wasUsingSpecialKeys = false;
         }
 
         componentDidMount() {
@@ -50,28 +61,36 @@ function clickDrag(Component, opts = {}) {
             }
         }
 
+        _setMousePosition(x, y) {
+            this.setState({
+                isMouseDown: true,
+                isMoving: false,
+                mouseDownPositionX: x,
+                mouseDownPositionY: y,
+                moveDeltaX: 0,
+                moveDeltaY: 0
+            });
+        }
+
         _onMouseDown(e) {
             // only left mouse button
             if(touch || e.button === 0) {
                 var pt = (e.changedTouches && e.changedTouches[0]) || e;
 
-                this.setState({
-                    isMouseDown: true,
-                    isMoving: false,
-                    mouseDownPositionX: pt.clientX,
-                    mouseDownPositionY: pt.clientY,
-                    moveDeltaX: 0,
-                    moveDeltaY: 0
-                });
+                this._setMousePosition(pt.clientX, pt.clientY);
+
+                onDragStart(e);
             }
         }
 
-        _onMouseUp() {
+        _onMouseUp(e) {
             if(this.state.isMouseDown) {
                 this.setState({
                     isMouseDown: false,
                     isMoving: false
                 });
+
+                onDragStop(e);
             }
         }
 
@@ -79,11 +98,20 @@ function clickDrag(Component, opts = {}) {
             if(this.state.isMouseDown) {
                 var pt = (e.changedTouches && e.changedTouches[0]) || e;
 
-                this.setState({
-                    isMoving: true,
-                    moveDeltaX: pt.clientX - this.state.mouseDownPositionX,
-                    moveDeltaY: pt.clientY - this.state.mouseDownPositionY
-                });
+                var isUsingSpecialKeys = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey;
+                if(resetOnSpecialKeys && this._wasUsingSpecialKeys !== isUsingSpecialKeys) {
+                    this._wasUsingSpecialKeys = isUsingSpecialKeys;
+                    this._setMousePosition(pt.clientX, pt.clientY);
+                }
+                else {
+                    this.setState(objectAssign({
+                        isMoving: true,
+                        moveDeltaX: pt.clientX - this.state.mouseDownPositionX,
+                        moveDeltaY: pt.clientY - this.state.mouseDownPositionY
+                    }, getSpecificEventData(e)));
+                }
+
+                onDragMove(e);
             }
         }
 
