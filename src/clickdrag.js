@@ -2,14 +2,15 @@
 
 var React = require('react');
 
-function clickDrag(Component) {
+function clickDrag(Component, opts = {}) {
+
+    var touch = opts.touch || false;
 
     return class extends React.Component {
         constructor() {
             this._onMouseDown = this._onMouseDown.bind(this);
             this._onMouseUp = this._onMouseUp.bind(this);
             this._onMouseMove = this._onMouseMove.bind(this);
-
 
             this.state = {
                 isMouseDown: false,
@@ -27,6 +28,12 @@ function clickDrag(Component) {
             node.addEventListener('mousedown', this._onMouseDown);
             document.addEventListener('mousemove', this._onMouseMove);
             document.addEventListener('mouseup', this._onMouseUp);
+
+            if(touch) {
+                node.addEventListener('touchstart', this._onMouseDown);
+                document.addEventListener('touchmove', this._onMouseMove);
+                document.addEventListener('touchend', this._onMouseUp);
+            }
         }
 
         componentWillUnmount() {
@@ -35,16 +42,24 @@ function clickDrag(Component) {
             node.removeEventListener('mousedown', this._onMouseDown);
             document.removeEventListener('mousemove', this._onMouseMove);
             document.removeEventListener('mouseup', this._onMouseUp);
+
+            if(touch) {
+                node.removeEventListener('touchstart', this._onMouseDown);
+                document.removeEventListener('touchmove', this._onMouseMove);
+                document.removeEventListener('touchend', this._onMouseUp);
+            }
         }
 
         _onMouseDown(e) {
             // only left mouse button
-            if(e.button === 0) {
+            if(touch || e.button === 0) {
+                var pt = (e.changedTouches && e.changedTouches[0]) || e;
+
                 this.setState({
                     isMouseDown: true,
                     isMoving: false,
-                    mouseDownPositionX: e.clientX,
-                    mouseDownPositionY: e.clientY,
+                    mouseDownPositionX: pt.clientX,
+                    mouseDownPositionY: pt.clientY,
                     moveDeltaX: 0,
                     moveDeltaY: 0
                 });
@@ -62,10 +77,12 @@ function clickDrag(Component) {
 
         _onMouseMove(e) {
             if(this.state.isMouseDown) {
+                var pt = (e.changedTouches && e.changedTouches[0]) || e;
+
                 this.setState({
                     isMoving: true,
-                    moveDeltaX: e.clientX - this.state.mouseDownPositionX,
-                    moveDeltaY: e.clientY - this.state.mouseDownPositionY
+                    moveDeltaX: pt.clientX - this.state.mouseDownPositionX,
+                    moveDeltaY: pt.clientY - this.state.mouseDownPositionY
                 });
             }
         }

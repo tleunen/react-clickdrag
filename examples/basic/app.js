@@ -40,6 +40,6 @@ var ExampleComponent = React.createClass({
     }
 });
 
-var ClickDragExample = clickDrag(ExampleComponent);
+var ClickDragExample = clickDrag(ExampleComponent, {touch: true});
 
 React.render(React.createElement(ClickDragExample), document.getElementById('App'));
