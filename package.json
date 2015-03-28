@@ -1,5 +1,5 @@
 {
-  "name": "react-clickdrag-mixin",
+  "name": "react-clickdrag",
   "version": "1.1.0",
   "description": "Easily click/touch and drag a react component",
   "main": "lib/clickdrag.js",
@@ -8,12 +8,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/tleunen/react-clickdrag-mixin.git"
+    "url": "git://github.com/tleunen/react-clickdrag.git"
   },
   "bugs": {
-    "url": "https://github.com/tleunen/react-clickdrag-mixin/issues"
+    "url": "https://github.com/tleunen/react-clickdrag/issues"
   },
-  "homepage": "https://github.com/tleunen/react-clickdrag-mixin",
+  "homepage": "https://github.com/tleunen/react-clickdrag",
   "keywords": [
     "react",
     "react-component",

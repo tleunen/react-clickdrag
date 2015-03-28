@@ -1,9 +1,7 @@
 'use strict';
 
 var React = require('react');
-//var clickDrag = require('../..'); // for some reasons, the code is broken with this code, even if it's the same, bug entered https://github.com/substack/node-browserify/issues/1181
-var clickDrag = require('./clickDrag');
-
+var clickDrag = require('../../lib/clickdrag');
 
 var ExampleComponent = React.createClass({
 
