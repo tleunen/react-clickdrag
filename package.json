@@ -1,25 +1,37 @@
 {
-  "name": "react-clickdrag-mixin",
+  "name": "react-clickdrag",
   "version": "1.1.0",
-  "description": "Easily click and drag a react component",
-  "main": "index.js",
+  "description": "Easily click/touch and drag a react component",
+  "main": "lib/clickdrag.js",
+  "files": [
+    "lib/"
+  ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/tleunen/react-clickdrag-mixin.git"
+    "url": "git://github.com/tleunen/react-clickdrag.git"
   },
   "bugs": {
-    "url": "https://github.com/tleunen/react-clickdrag-mixin/issues"
+    "url": "https://github.com/tleunen/react-clickdrag/issues"
   },
-  "homepage": "https://github.com/tleunen/react-clickdrag-mixin",
+  "homepage": "https://github.com/tleunen/react-clickdrag",
   "keywords": [
     "react",
-    "mixin",
-    "react-mixin",
+    "react-component",
     "drag",
     "clickdrag",
+    "touch",
+    "touchdrag",
     "dom",
     "element"
   ],
   "author": "Tommy Leunen <tommy.leunen@gmail.com> (http://tommyleunen.com/)",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.13.1"
+  },
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "mkdir lib && babel src/clickdrag.js -o lib/clickdrag.js",
+    "dev": "babel src/clickdrag.js -w -o lib/clickdrag.js"
+  }
 }
