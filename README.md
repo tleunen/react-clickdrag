@@ -17,12 +17,12 @@ The options are:
 - `onDragMove`: Function called when you move the component. (default: empty function)
 
 When you wrap your component using the `clickdrag` function, your component will receive a special props called `dataDrag`. Inside this `dataDrag` object, you'll find these information:
-- isMouseDown (boolean)
-- isMoving (boolean)
-- mouseDownPositionX (number)
-- mouseDownPositionY (number)
-- moveDeltaX (number)
-- moveDeltaY (number)
+- `isMouseDown` (boolean)
+- `isMoving` (boolean)
+- `mouseDownPositionX` (number)
+- `mouseDownPositionY` (number)
+- `moveDeltaX` (number)
+- `moveDeltaY` (number)
 
 If you defined a specific event data function using `getSpecificEventData`. You'll also find the information you specify in the `dataDrag` props.
 
