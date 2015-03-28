@@ -8,10 +8,15 @@
         "jsx": true
     },
     "rules": {
+        "brace-style": [2, "stroustrup", { "allowSingleLine": true }],
+        "comma-style": [2, "last"],
         "indent": 2,
         "no-underscore-dangle": false,
-        "quotes": "single",
+        "quotes": [2, "single", "avoid-escape"],
         "semi": [2, "always"],
+        "space-before-function-paren": [2, "never"],
+        "space-after-keywords": [2, "never"],
+        "strict": [2, "global"],
 
         "react/jsx-quotes": 1,
         "react/jsx-no-undef": 1,
