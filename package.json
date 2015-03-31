@@ -26,12 +26,12 @@
   ],
   "author": "Tommy Leunen <tommy.leunen@gmail.com> (http://tommyleunen.com/)",
   "license": "MIT",
-  "dependencies": {
-    "react": "^0.13.1"
+  "peerDependencies": {
+    "react": ">=0.13"
   },
   "scripts": {
     "prepublish": "npm run build",
-    "build": "mkdir lib && babel src/clickdrag.js -o lib/clickdrag.js",
+    "build": "babel src/clickdrag.js -o lib/clickdrag.js",
     "dev": "babel src/clickdrag.js -w -o lib/clickdrag.js"
   }
 }
