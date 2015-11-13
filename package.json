@@ -1,6 +1,6 @@
 {
   "name": "react-clickdrag",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Easily click/touch and drag a react component",
   "main": "lib/clickdrag.js",
   "files": [
