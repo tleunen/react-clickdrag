@@ -31,20 +31,23 @@ If you defined a specific event data function using `getSpecificEventData`. You'
 Here's a copy of the example you can find in [example folder](/examples/basic/)
 
 ```js
-var clickDrag = require('react-clickdrag');
+import clickdrag from 'react-clickdrag';
 
-var ExampleComponent = React.createClass({
 
-    getInitialState: function() {
-        return {
+class ExampleComponent extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
             lastPositionX: 0,
             lastPositionY: 0,
             currentX: 0,
             currentY: 0
         };
-    },
+    }
 
-    componentWillReceiveProps: function(nextProps) {
+    componentWillReceiveProps(nextProps) {
         if(nextProps.dataDrag.isMoving) {
             this.setState({
                 currentX: this.state.lastPositionX + nextProps.dataDrag.moveDeltaX,
@@ -57,20 +60,20 @@ var ExampleComponent = React.createClass({
                 lastPositionY: this.state.currentY
             });
         }
-    },
+    }
 
-    render: function () {
+    render() {
         var translation = 'translate('+this.state.currentX+'px, '+this.state.currentY+'px)';
 
         return React.createElement('div', {
             style: {width: '200px', height: '200px', backgroundColor: 'red', transform: translation}
         });
     }
-});
+}
 
 var ClickDragExample = clickDrag(ExampleComponent, {touch: true});
 
-module.exports = ClickDragExample;
+export default ClickDragExample;
 
 ```
 You can find another example of this module inside [react-number-editor](https://github.com/tleunen/react-number-editor).
