@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import { findDOMNode } from 'react-dom';
 import objectAssign from 'react/lib/Object.assign';
 
 var noop = () => {};
@@ -35,7 +36,7 @@ function clickDrag(Component, opts = {}) {
         }
 
         componentDidMount() {
-            var node = React.findDOMNode(this);
+            var node = findDOMNode(this);
 
             node.addEventListener('mousedown', this._onMouseDown);
             document.addEventListener('mousemove', this._onMouseMove);
@@ -49,7 +50,7 @@ function clickDrag(Component, opts = {}) {
         }
 
         componentWillUnmount() {
-            var node = React.findDOMNode(this);
+            var node = findDOMNode(this);
 
             node.removeEventListener('mousedown', this._onMouseDown);
             document.removeEventListener('mousemove', this._onMouseMove);
