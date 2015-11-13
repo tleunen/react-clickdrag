@@ -26,12 +26,19 @@
   ],
   "author": "Tommy Leunen <tommy.leunen@gmail.com> (http://tommyleunen.com/)",
   "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.1.18",
+    "babel-core": "^6.1.19",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "babel-preset-stage-0": "^6.1.18",
+    "react": "^0.14.2"
+  },
   "peerDependencies": {
-    "react": ">=0.13"
+    "react": "0.14.x"
   },
   "scripts": {
-    "prepublish": "npm run build",
-    "build": "babel src/clickdrag.js -o lib/clickdrag.js",
-    "dev": "babel src/clickdrag.js -w -o lib/clickdrag.js"
+    "compile": "rm -rf lib && babel src --out-dir lib",
+    "prepublish": "npm run compile"
   }
 }
