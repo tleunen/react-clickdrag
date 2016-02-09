@@ -1,19 +1,19 @@
-'use strict';
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import objectAssign from 'react/lib/Object.assign';
 
-var noop = () => {};
+const noop = () => {
+    // do nothing
+};
 
 function clickDrag(Component, opts = {}) {
+    const touch = opts.touch || false;
+    const resetOnSpecialKeys = opts.resetOnSpecialKeys || false;
+    const getSpecificEventData = opts.getSpecificEventData || (() => ({}));
 
-    var touch = opts.touch || false;
-    var resetOnSpecialKeys = opts.resetOnSpecialKeys || false;
-    var getSpecificEventData = opts.getSpecificEventData || (() => ({}));
-
-    var onDragStart = opts.onDragStart || noop;
-    var onDragStop = opts.onDragStop || noop;
-    var onDragMove = opts.onDragMove || noop;
+    const onDragStart = opts.onDragStart || noop;
+    const onDragStop = opts.onDragStop || noop;
+    const onDragMove = opts.onDragMove || noop;
 
     class ClickDrag extends React.Component {
         constructor(props) {
@@ -36,7 +36,7 @@ function clickDrag(Component, opts = {}) {
         }
 
         componentDidMount() {
-            var node = findDOMNode(this);
+            const node = findDOMNode(this);
 
             node.addEventListener('mousedown', this._onMouseDown);
             document.addEventListener('mousemove', this._onMouseMove);
@@ -50,7 +50,7 @@ function clickDrag(Component, opts = {}) {
         }
 
         componentWillUnmount() {
-            var node = findDOMNode(this);
+            const node = findDOMNode(this);
 
             node.removeEventListener('mousedown', this._onMouseDown);
             document.removeEventListener('mousemove', this._onMouseMove);
@@ -77,7 +77,7 @@ function clickDrag(Component, opts = {}) {
         _onMouseDown(e) {
             // only left mouse button
             if(touch || e.button === 0) {
-                var pt = (e.changedTouches && e.changedTouches[0]) || e;
+                const pt = (e.changedTouches && e.changedTouches[0]) || e;
 
                 this._setMousePosition(pt.clientX, pt.clientY);
 
@@ -98,9 +98,9 @@ function clickDrag(Component, opts = {}) {
 
         _onMouseMove(e) {
             if(this.state.isMouseDown) {
-                var pt = (e.changedTouches && e.changedTouches[0]) || e;
+                const pt = (e.changedTouches && e.changedTouches[0]) || e;
 
-                var isUsingSpecialKeys = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey;
+                const isUsingSpecialKeys = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey;
                 if(resetOnSpecialKeys && this._wasUsingSpecialKeys !== isUsingSpecialKeys) {
                     this._wasUsingSpecialKeys = isUsingSpecialKeys;
                     this._setMousePosition(pt.clientX, pt.clientY);
@@ -120,7 +120,7 @@ function clickDrag(Component, opts = {}) {
         render() {
             return <Component {...this.props} dataDrag={this.state} />;
         }
-    };
+    }
 
     return ClickDrag;
 }
