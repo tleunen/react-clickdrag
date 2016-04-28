@@ -1,10 +1,7 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
-import objectAssign from 'react/lib/Object.assign';
 
-const noop = () => {
-    // do nothing
-};
+const noop = () => {};
 
 function clickDrag(Component, opts = {}) {
     const touch = opts.touch || false;
@@ -19,9 +16,9 @@ function clickDrag(Component, opts = {}) {
         constructor(props) {
             super(props);
 
-            this._onMouseDown = this._onMouseDown.bind(this);
-            this._onMouseUp = this._onMouseUp.bind(this);
-            this._onMouseMove = this._onMouseMove.bind(this);
+            this.onMouseDown = this.onMouseDown.bind(this);
+            this.onMouseUp = this.onMouseUp.bind(this);
+            this.onMouseMove = this.onMouseMove.bind(this);
 
             this.state = {
                 isMouseDown: false,
@@ -32,61 +29,50 @@ function clickDrag(Component, opts = {}) {
                 moveDeltaY: 0
             };
 
-            this._wasUsingSpecialKeys = false;
+            this.wasUsingSpecialKeys = false;
         }
 
         componentDidMount() {
             const node = findDOMNode(this);
 
-            node.addEventListener('mousedown', this._onMouseDown);
-            document.addEventListener('mousemove', this._onMouseMove);
-            document.addEventListener('mouseup', this._onMouseUp);
+            node.addEventListener('mousedown', this.onMouseDown);
+            document.addEventListener('mousemove', this.onMouseMove);
+            document.addEventListener('mouseup', this.onMouseUp);
 
-            if(touch) {
-                node.addEventListener('touchstart', this._onMouseDown);
-                document.addEventListener('touchmove', this._onMouseMove);
-                document.addEventListener('touchend', this._onMouseUp);
+            if (touch) {
+                node.addEventListener('touchstart', this.onMouseDown);
+                document.addEventListener('touchmove', this.onMouseMove);
+                document.addEventListener('touchend', this.onMouseUp);
             }
         }
 
         componentWillUnmount() {
             const node = findDOMNode(this);
 
-            node.removeEventListener('mousedown', this._onMouseDown);
-            document.removeEventListener('mousemove', this._onMouseMove);
-            document.removeEventListener('mouseup', this._onMouseUp);
+            node.removeEventListener('mousedown', this.onMouseDown);
+            document.removeEventListener('mousemove', this.onMouseMove);
+            document.removeEventListener('mouseup', this.onMouseUp);
 
-            if(touch) {
-                node.removeEventListener('touchstart', this._onMouseDown);
-                document.removeEventListener('touchmove', this._onMouseMove);
-                document.removeEventListener('touchend', this._onMouseUp);
+            if (touch) {
+                node.removeEventListener('touchstart', this.onMouseDown);
+                document.removeEventListener('touchmove', this.onMouseMove);
+                document.removeEventListener('touchend', this.onMouseUp);
             }
         }
 
-        _setMousePosition(x, y) {
-            this.setState({
-                isMouseDown: true,
-                isMoving: false,
-                mouseDownPositionX: x,
-                mouseDownPositionY: y,
-                moveDeltaX: 0,
-                moveDeltaY: 0
-            });
-        }
-
-        _onMouseDown(e) {
+        onMouseDown(e) {
             // only left mouse button
-            if(touch || e.button === 0) {
+            if (touch || e.button === 0) {
                 const pt = (e.changedTouches && e.changedTouches[0]) || e;
 
-                this._setMousePosition(pt.clientX, pt.clientY);
+                this.setMousePosition(pt.clientX, pt.clientY);
 
                 onDragStart(e);
             }
         }
 
-        _onMouseUp(e) {
-            if(this.state.isMouseDown) {
+        onMouseUp(e) {
+            if (this.state.isMouseDown) {
                 this.setState({
                     isMouseDown: false,
                     isMoving: false
@@ -96,25 +82,36 @@ function clickDrag(Component, opts = {}) {
             }
         }
 
-        _onMouseMove(e) {
-            if(this.state.isMouseDown) {
+        onMouseMove(e) {
+            if (this.state.isMouseDown) {
                 const pt = (e.changedTouches && e.changedTouches[0]) || e;
 
                 const isUsingSpecialKeys = e.metaKey || e.ctrlKey || e.shiftKey || e.altKey;
-                if(resetOnSpecialKeys && this._wasUsingSpecialKeys !== isUsingSpecialKeys) {
-                    this._wasUsingSpecialKeys = isUsingSpecialKeys;
-                    this._setMousePosition(pt.clientX, pt.clientY);
-                }
-                else {
-                    this.setState(objectAssign({
+                if (resetOnSpecialKeys && this.wasUsingSpecialKeys !== isUsingSpecialKeys) {
+                    this.wasUsingSpecialKeys = isUsingSpecialKeys;
+                    this.setMousePosition(pt.clientX, pt.clientY);
+                } else {
+                    this.setState({
                         isMoving: true,
                         moveDeltaX: pt.clientX - this.state.mouseDownPositionX,
-                        moveDeltaY: pt.clientY - this.state.mouseDownPositionY
-                    }, getSpecificEventData(e)));
+                        moveDeltaY: pt.clientY - this.state.mouseDownPositionY,
+                        ...getSpecificEventData(e)
+                    });
                 }
 
                 onDragMove(e);
             }
+        }
+
+        setMousePosition(x, y) {
+            this.setState({
+                isMouseDown: true,
+                isMoving: false,
+                mouseDownPositionX: x,
+                mouseDownPositionY: y,
+                moveDeltaX: 0,
+                moveDeltaY: 0
+            });
         }
 
         render() {
