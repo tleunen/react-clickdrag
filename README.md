@@ -1,6 +1,5 @@
 # react-clickdrag
-
-[![NPM](https://nodei.co/npm/react-clickdrag.png)](https://nodei.co/npm/react-clickdrag/)
+![npm][npm-version-image] [![Build Status][ci-image]][ci-url] [![Coverage Status][coverage-image]][coverage-url]
 
 With `react-clickdrag`, you'll be able to easily add a click and drag feature on every component you want.
 
@@ -81,3 +80,10 @@ You can find another example of this module inside [react-number-editor](https:/
 ## License
 
 MIT, see [LICENSE.md](/LICENSE.md) for details.
+
+
+[ci-image]: https://circleci.com/gh/tleunen/react-clickdrag.svg?style=shield
+[ci-url]: https://circleci.com/gh/tleunen/react-clickdrag
+[coverage-image]: https://codecov.io/gh/tleunen/react-clickdrag/branch/master/graph/badge.svg
+[coverage-url]: https://codecov.io/gh/tleunen/react-clickdrag
+[npm-version-image]: https://img.shields.io/npm/v/react-clickdrag.svg
