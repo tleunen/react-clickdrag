@@ -34,6 +34,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-register": "^6.8.0",
     "chai": "^3.5.0",
+    "condition-circle": "^1.2.0",
     "enzyme": "^2.2.0",
     "eslint": "^2.9.0",
     "eslint-config-airbnb": "^8.0.0",
@@ -46,12 +47,15 @@
     "react-addons-test-utils": "^15.0.2",
     "react-dom": "^15.0.2",
     "rimraf": "^2.5.2",
-    "sinon": "^1.17.4",
-    "semantic-release": "^4.3.5"
+    "semantic-release": "^4.3.5",
+    "sinon": "^1.17.4"
   },
   "peerDependencies": {
     "react": "0.14.x || ^15.0.0-rc",
     "react-dom": "0.14.x || ^15.0.0-rc"
+  },
+  "release": {
+    "verifyConditions": "condition-circle"
   },
   "scripts": {
     "clean": "rimraf coverage lib out",
