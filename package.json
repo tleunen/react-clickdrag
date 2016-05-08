@@ -55,9 +55,9 @@
   },
   "scripts": {
     "clean": "rimraf coverage lib out",
-    "react:clean": "rimraf node_modules/react node_modules/react-dom",
-    "react:14": "npm run react:clean && npm i react@0.14 react-dom@0.14",
-    "react:15": "npm run react:clean && npm i react@15 react-dom@15",
+    "react:clean": "rimraf node_modules/react node_modules/react-dom node_modules/react-addons-test-utils",
+    "react:14": "npm run react:clean && npm i react@0.14 react-dom@0.14 react-addons-test-utils@0.14",
+    "react:15": "npm run react:clean && npm i react@15 react-dom@15 react-addons-test-utils@15",
     "test:react:14": "npm run react:14 && npm run test:suite",
     "test:react:15": "npm run react:15 && npm run test:suite",
     "test:suite": "mocha --compilers js:babel-register -r ./test/setup.js",
