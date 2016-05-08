@@ -5,9 +5,9 @@ dependencies:
     - nvm install 4
 test:
   override:
+    - nvm use 4 && npm i && npm run test:only
+    - nvm use 5 && npm i && npm run test:only
     - nvm use stable && npm i && npm t
-    - nvm use 5 && npm i && npm t
-    - nvm use 4 && npm i && npm t
 deployment:
   release:
     branch: master
