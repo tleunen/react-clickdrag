@@ -62,7 +62,7 @@
     "test:react:15": "npm run react:15 && npm run test:suite",
     "test:suite": "mocha --compilers js:babel-register -r ./test/setup.js",
     "test:watch": "npm run test:suite -- -w",
-    "test": "npm run test:react:14 && nyc npm run test:react:15",
+    "test": "npm run test:react:14 && nyc npm run test:react:15 && nyc report --reporter=lcov",
     "lint": "eslint src test",
     "compile": "rimraf lib && babel src --out-dir lib",
     "prepublish": "npm run compile",
