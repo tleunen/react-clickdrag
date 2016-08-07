@@ -26,7 +26,7 @@ function clickDrag(Component, opts = {}) {
                 mouseDownPositionX: 0,
                 mouseDownPositionY: 0,
                 moveDeltaX: 0,
-                moveDeltaY: 0
+                moveDeltaY: 0,
             };
 
             this.wasUsingSpecialKeys = false;
@@ -75,7 +75,7 @@ function clickDrag(Component, opts = {}) {
             if (this.state.isMouseDown) {
                 this.setState({
                     isMouseDown: false,
-                    isMoving: false
+                    isMoving: false,
                 });
 
                 onDragStop(e);
@@ -95,7 +95,7 @@ function clickDrag(Component, opts = {}) {
                         isMoving: true,
                         moveDeltaX: pt.clientX - this.state.mouseDownPositionX,
                         moveDeltaY: pt.clientY - this.state.mouseDownPositionY,
-                        ...getSpecificEventData(e)
+                        ...getSpecificEventData(e),
                     });
                 }
 
@@ -110,14 +110,14 @@ function clickDrag(Component, opts = {}) {
                 mouseDownPositionX: x,
                 mouseDownPositionY: y,
                 moveDeltaX: 0,
-                moveDeltaY: 0
+                moveDeltaY: 0,
             });
         }
 
         render() {
             return <Component {...this.props} dataDrag={this.state} />;
         }
-    }
+  }
 
     return ClickDrag;
 }

@@ -13,14 +13,14 @@ const initialState = {
     mouseDownPositionX: 0,
     mouseDownPositionY: 0,
     moveDeltaX: 0,
-    moveDeltaY: 0
+    moveDeltaY: 0,
 };
 
 function mouseDownAt(node, x, y, rightClick) {
     node.dispatchEvent(new MouseEvent('mousedown', {
         button: rightClick ? 1 : 0,
         clientX: x,
-        clientY: y
+        clientY: y,
     }));
 }
 
@@ -30,7 +30,7 @@ function mouseMove(x, y, ctrl, shift, meta) {
         clientY: y,
         shiftKey: !!shift,
         metaKey: !!meta,
-        ctrlKey: !!ctrl
+        ctrlKey: !!ctrl,
     }));
 }
 
@@ -102,7 +102,7 @@ describe('mousedown', () => {
             ...initialState,
             isMouseDown: true,
             mouseDownPositionX: 132,
-            mouseDownPositionY: 642
+            mouseDownPositionY: 642,
         });
     });
 
@@ -141,7 +141,7 @@ describe('mouseup', () => {
             ...initialState,
             isMouseDown: false,
             mouseDownPositionX: 132,
-            mouseDownPositionY: 642
+            mouseDownPositionY: 642,
         });
     });
 });
@@ -171,7 +171,7 @@ describe('mousemove', () => {
             mouseDownPositionX: 100,
             mouseDownPositionY: 150,
             moveDeltaX: -50,
-            moveDeltaY: -25
+            moveDeltaY: -25,
         });
     });
 
@@ -180,7 +180,7 @@ describe('mousemove', () => {
         const DecoraredComp = clickdrag(Comp, {
             getSpecificEventData: (e) => ({
                 shiftKey: e.shiftKey,
-                ctrlKey: e.ctrlKey
+                ctrlKey: e.ctrlKey,
             }),
         });
         const wrapper = mount(<DecoraredComp />);
@@ -196,7 +196,7 @@ describe('mousemove', () => {
             moveDeltaX: -50,
             moveDeltaY: -25,
             shiftKey: true,
-            ctrlKey: false
+            ctrlKey: false,
         });
     });
 
@@ -204,7 +204,7 @@ describe('mousemove', () => {
         const Comp = () => <div>Hello</div>;
         const DecoraredComp = clickdrag(Comp, {
             getSpecificEventData: (e) => ({
-                ctrlKey: e.ctrlKey
+                ctrlKey: e.ctrlKey,
             }),
         });
         const wrapper = mount(<DecoraredComp />);
@@ -220,7 +220,7 @@ describe('mousemove', () => {
             mouseDownPositionY: 150,
             moveDeltaX: -99,
             moveDeltaY: 23,
-            ctrlKey: true
+            ctrlKey: true,
         });
     });
 
@@ -229,7 +229,7 @@ describe('mousemove', () => {
         const DecoraredComp = clickdrag(Comp, {
             resetOnSpecialKeys: true,
             getSpecificEventData: (e) => ({
-                ctrlKey: e.ctrlKey
+                ctrlKey: e.ctrlKey,
             }),
         });
         const wrapper = mount(<DecoraredComp />);
@@ -246,7 +246,7 @@ describe('mousemove', () => {
             mouseDownPositionY: 173,
             moveDeltaX: 0,
             moveDeltaY: 1,
-            ctrlKey: true
+            ctrlKey: true,
         });
     });
 });
