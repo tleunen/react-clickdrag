@@ -1,3 +1,4 @@
+/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 /* eslint-env mocha */
 import React from 'react';
 import { findDOMNode } from 'react-dom';
