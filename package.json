@@ -37,13 +37,13 @@
     "chai": "^3.5.0",
     "cross-env": "^2.0.0",
     "enzyme": "^2.4.1",
-    "eslint": "^3.2.2",
-    "eslint-config-airbnb": "^10.0.0",
-    "eslint-plugin-import": "^1.12.0",
-    "eslint-plugin-jsx-a11y": "^2.0.1",
+    "eslint": "^3.3.0",
+    "eslint-config-airbnb": "^10.0.1",
+    "eslint-plugin-import": "^1.13.0",
+    "eslint-plugin-jsx-a11y": "^2.1.0",
     "eslint-plugin-react": "^6.0.0",
-    "jsdom": "^9.4.1",
-    "mocha": "^3.0.1",
+    "jsdom": "^9.4.2",
+    "mocha": "^3.0.2",
     "nyc": "^7.1.0",
     "react": "^15.3.0",
     "react-addons-test-utils": "^15.3.0",
@@ -63,7 +63,7 @@
     "react:15": "npm run react:clean && npm i react@15 react-dom@15 react-addons-test-utils@15",
     "test:react:14": "npm run react:14 && cross-env NODE_ENV=test npm run test:suite",
     "test:react:15": "npm run react:15 && cross-env NODE_ENV=test npm run test:suite",
-    "test:suite": "mocha --compilers js:babel-register -r ./test/setup.js",
+    "test:suite": "mocha -r babel-register -r ./test/setup.js 'test/*'",
     "test:watch": "npm run test:suite -- -w",
     "test:only": "npm run test:react:14 && npm run test:react:15",
     "pretest": "npm run lint",
@@ -74,9 +74,6 @@
     "release": "standard-version"
   },
   "nyc": {
-    "include": [
-      "src/*.js"
-    ],
     "sourceMap": false,
     "instrument": false,
     "reporter": [
