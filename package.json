@@ -27,7 +27,7 @@
   "author": "Tommy Leunen <tommy.leunen@gmail.com> (http://tommyleunen.com/)",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.16.0",
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.17.0",
     "babel-plugin-istanbul": "^2.0.1",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
