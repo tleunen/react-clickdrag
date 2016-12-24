@@ -1,18 +1,3 @@
 {
-    "extends": "airbnb",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true
-        }
-    },
-    "env": {
-        "browser": true
-    },
-    "rules": {
-        "indent": [2, 4, {"SwitchCase": 1}],
-        "max-len": 0,
-
-        "react/jsx-indent": [2, 4],
-        "react/jsx-indent-props": [2, 4]
-    }
+  "extends": "tleunen-react"
 }
