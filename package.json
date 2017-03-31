@@ -35,7 +35,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
-    "cross-env": "^3.1.3",
+    "cross-env": "^4.0.0",
     "enzyme": "^2.7.0",
     "eslint": "^3.12.2",
     "eslint-config-tleunen-react": "^1.0.3",
