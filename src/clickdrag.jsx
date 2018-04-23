@@ -54,7 +54,7 @@ function clickDrag(Component, opts = {}) {
             document.removeEventListener('mouseup', this.onMouseUp);
 
             if (touch) {
-                node.removeEventListener('touchstart', this.onMouseDown);
+                node.removeEventListener('touchstart', this.onMouseDown, {passive:true});
                 document.removeEventListener('touchmove', this.onMouseMove);
                 document.removeEventListener('touchend', this.onMouseUp);
             }
