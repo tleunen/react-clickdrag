@@ -35,12 +35,12 @@ function clickDrag(Component, opts = {}) {
         componentDidMount() {
             const node = findDOMNode(this);
 
-            node.addEventListener('mousedown', this.onMouseDown);
+            node && node.addEventListener('mousedown', this.onMouseDown);
             document.addEventListener('mousemove', this.onMouseMove);
             document.addEventListener('mouseup', this.onMouseUp);
 
             if (touch) {
-                node.addEventListener('touchstart', this.onMouseDown);
+                node && node.addEventListener('touchstart', this.onMouseDown);
                 document.addEventListener('touchmove', this.onMouseMove);
                 document.addEventListener('touchend', this.onMouseUp);
             }
@@ -49,12 +49,12 @@ function clickDrag(Component, opts = {}) {
         componentWillUnmount() {
             const node = findDOMNode(this);
 
-            node.removeEventListener('mousedown', this.onMouseDown);
+            node && node.removeEventListener('mousedown', this.onMouseDown);
             document.removeEventListener('mousemove', this.onMouseMove);
             document.removeEventListener('mouseup', this.onMouseUp);
 
             if (touch) {
-                node.removeEventListener('touchstart', this.onMouseDown, {passive:true});
+                node && node.removeEventListener('touchstart', this.onMouseDown, {passive:true});
                 document.removeEventListener('touchmove', this.onMouseMove);
                 document.removeEventListener('touchend', this.onMouseUp);
             }
