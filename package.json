@@ -29,66 +29,51 @@
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
-    "babel-plugin-istanbul": "^3.0.0",
+    "babel-jest": "^23.4.2",
     "babel-plugin-transform-object-rest-spread": "^6.20.2",
-    "babel-preset-latest": "^6.16.0",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.16.0",
-    "babel-register": "^6.18.0",
-    "chai": "^3.5.0",
-    "cross-env": "^3.1.3",
-    "enzyme": "^2.7.0",
-    "eslint": "^3.12.2",
-    "eslint-config-tleunen-react": "^1.0.3",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.8.0",
-    "jsdom": "^9.9.1",
-    "mocha": "^3.2.0",
-    "nyc": "^10.0.0",
-    "react": "^15.4.1",
-    "react-addons-test-utils": "^15.4.1",
-    "react-dom": "^15.4.1",
-    "rimraf": "^2.5.4",
-    "sinon": "^1.17.6",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "eslint": "^5.5.0",
+    "eslint-plugin-react": "^7.11.1",
+    "husky": "^0.14.3",
+    "jest": "^23.5.0",
+    "lint-staged": "^7.2.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
     "standard-version": "^4.0.0"
   },
   "peerDependencies": {
-    "react": "0.14.x || ^15.0.0-rc",
-    "react-dom": "0.14.x || ^15.0.0-rc"
+    "react": "^16.0.0-0",
+    "react-dom": "^16.0.0-0"
   },
   "scripts": {
     "clean": "rimraf coverage lib out",
-    "react:clean": "rimraf node_modules/react node_modules/react-dom node_modules/react-addons-test-utils",
-    "react:14": "npm run react:clean && npm i react@0.14 react-dom@0.14 react-addons-test-utils@0.14",
-    "react:15": "npm run react:clean && npm i react@15 react-dom@15 react-addons-test-utils@15",
-    "test:react:14": "npm run react:14 && cross-env NODE_ENV=test npm run test:suite",
-    "test:react:15": "npm run react:15 && cross-env NODE_ENV=test npm run test:suite",
     "test:suite": "mocha -r babel-register -r ./test/setup.js 'test/*'",
     "test:watch": "npm run test:suite -- -w",
-    "test:only": "npm run test:react:14 && npm run test:react:15",
     "pretest": "npm run lint",
-    "test": "npm run test:react:14 && cross-env NODE_ENV=test nyc npm run test:react:15",
-    "lint": "eslint src test",
-    "compile": "rimraf lib && cross-env NODE_ENV=production babel src --out-dir lib",
+    "test": "jest --coverage",
+    "lint": "eslint src test --ext .jsx,.js",
+    "compile": "babel src --out-dir lib",
     "prepublish": "npm run compile",
     "release": "standard-version"
   },
-  "nyc": {
-    "sourceMap": false,
-    "instrument": false,
-    "reporter": [
-      "lcov",
-      "text"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,json,md}": [
+      "prettier --write",
+      "git add"
     ]
   },
-  "greenkeeper": {
-    "ignore": [
-      "eslint",
-      "eslint-plugin-import",
-      "eslint-plugin-jsx-a11y",
-      "eslint-plugin-react",
-      "react-dom",
-      "react-addons-test-utils"
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/test/setup.js",
+    "collectCoverageFrom": [
+      "src/**/*.js{x}"
     ]
   }
 }
