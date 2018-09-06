@@ -1,8 +1,11 @@
 {
   "scripts": {
-    "build": "browserify app.js --debug -o app.min.js"
+    "build": "npx browserify app.js --debug -o app.min.js"
   },
   "devDependencies": {
     "babelify": "^5.0.4"
+  },
+  "dependencies": {
+    "browserify": "^16.2.2"
   }
 }

@@ -1,8 +1,4 @@
-/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
-const jsdom = require('jsdom').jsdom;
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-global.document = jsdom('<!doctype html><html><body></body></html>');
-global.window = document.defaultView;
-global.navigator = window.navigator;
-
-global.MouseEvent = window.MouseEvent;
+Enzyme.configure({ adapter: new Adapter() });
